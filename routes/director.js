@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
         },
         {
             $group: {
-                _id : {
+                _id: {
                     _id: '$_id',
                     name: '$name',
                     surname: '$surname',
@@ -86,7 +86,7 @@ router.get('/:director_id', (req, res) => {
         },
         {
             $group: {
-                _id : {
+                _id: {
                     _id: '$_id',
                     name: '$name',
                     surname: '$surname',
@@ -113,5 +113,35 @@ router.get('/:director_id', (req, res) => {
         res.json(err);
     })
 });
+
+router.put('/:director_id', (req, res, next) => {
+    const promise = Director.findByIdAndUpdate(
+        req.params.director_id,
+        req.body,
+        {
+            new: true // bu olursa güncel datayı olmazsa güncellenmemiş datayı döner
+        }
+    );
+
+    promise.then((data) => {
+        if (!data)
+            next({ message: "The director was not found." })
+        res.json(data);
+    }).catch((err) => {
+        res.json(err);
+    });
+});
+
+router.delete('/:director_id', (req, res, next) => {
+    const promise = Director.findByIdAndRemove(req.params.director_id);
+  
+    promise.then((data) => {
+      if (!data)
+        next({ message: "The director was not found." })
+      res.json(data);
+    }).catch((err) => {
+      res.json(err);
+    });
+  });
 
 module.exports = router;
