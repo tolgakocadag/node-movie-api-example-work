@@ -34,6 +34,6 @@ Movie API - NODE JS
 
 
 # Demo
-[Live demo on Heroku](https://node-egitimi-movie-api.herokuapp.com/)
+[Live demo on Heroku](https://node-movie-api-tolgakocadag.herokuapp.com/)
 
 enjoy!
